@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guest RSVP Tracker</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Guest RSVP Tracker</h1>
+      <button id="new-event-btn" class="btn primary">+ New Event</button>
+    </header>
+
+    <!-- Events List View -->
+    <section id="events-view">
+      <div id="events-list" class="card-list"></div>
+    </section>
+
+    <!-- Single Event View -->
+    <section id="event-view" class="hidden">
+      <button id="back-btn" class="btn secondary">← Back to Events</button>
+      <div class="event-header">
+        <h2 id="event-title"></h2>
+        <div id="event-meta"></div>
+        <div class="actions">
+          <button id="add-guest-btn" class="btn primary">+ Add Guest</button>
+          <a id="export-btn" class="btn secondary" href="#">Export CSV</a>
+          <button id="delete-event-btn" class="btn danger">Delete Event</button>
+        </div>
+      </div>
+
+      <div class="filters">
+        <button class="filter-btn active" data-status="">All</button>
+        <button class="filter-btn" data-status="invited">Invited</button>
+        <button class="filter-btn" data-status="confirmed">Confirmed</button>
+        <button class="filter-btn" data-status="maybe">Maybe</button>
+        <button class="filter-btn" data-status="declined">Declined</button>
+      </div>
+
+      <div id="guests-list" class="card-list"></div>
+    </section>
+  </div>
+
+  <!-- New / Edit Event Modal -->
+  <div id="event-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3 id="event-modal-title">New Event</h3>
+      <form id="event-form">
+        <label>Name *</label>
+        <input type="text" id="event-name" required />
+
+        <label>Date</label>
+        <input type="date" id="event-date" />
+
+        <label>Location</label>
+        <input type="text" id="event-location" />
+
+        <label>Max Capacity</label>
+        <input type="number" id="event-capacity" min="0" />
+
+        <label>Notes</label>
+        <textarea id="event-notes" rows="3"></textarea>
+
+        <div class="modal-actions">
+          <button type="button" class="btn secondary" id="cancel-event">Cancel</button>
+          <button type="submit" class="btn primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add / Edit Guest Modal -->
+  <div id="guest-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3 id="guest-modal-title">Add Guest</h3>
+      <form id="guest-form">
+        <label>Name *</label>
+        <input type="text" id="guest-name" required />
+
+        <label>Email</label>
+        <input type="email" id="guest-email" />
+
+        <label>Phone</label>
+        <input type="text" id="guest-phone" />
+
+        <label>Status</label>
+        <select id="guest-status">
+          <option value="invited">Invited</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="maybe">Maybe</option>
+          <option value="declined">Declined</option>
+        </select>
+
+        <label>Plus Ones</label>
+        <input type="number" id="guest-plus" min="0" value="0" />
+
+        <label>Dietary Notes</label>
+        <input type="text" id="guest-dietary" />
+
+        <label>Notes</label>
+        <textarea id="guest-notes" rows="2"></textarea>
+
+        <div class="modal-actions">
+          <button type="button" class="btn secondary" id="cancel-guest">Cancel</button>
+          <button type="submit" class="btn primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
