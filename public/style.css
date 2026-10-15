@@ -271,6 +271,79 @@ body {
   font-size: 0.95rem;
 }
 
+/* Rich Empty State */
+.empty-state {
+  text-align: center;
+  padding: 20px 0 40px;
+}
+
+.empty-hero {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px 24px;
+  margin-bottom: 32px;
+  box-shadow: var(--shadow);
+}
+
+.empty-hero h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.empty-hero p {
+  color: var(--muted);
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.use-cases h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.use-case-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.use-case-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 14px;
+  text-align: center;
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+
+.use-case-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.use-case-icon {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.use-case-card strong {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+}
+
+.use-case-card span {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
 /* Modal */
 .modal {
   position: fixed;
@@ -363,5 +436,9 @@ body {
   .guest-actions .btn {
     flex: 1;
     justify-content: center;
+  }
+
+  .use-case-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
