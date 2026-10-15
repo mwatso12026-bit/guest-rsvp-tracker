@@ -1,26 +1,29 @@
-# Guest List + RSVP Tracker
+# GuestRSVP
 
-Simple, focused tool for managing event guest lists and RSVPs.
+**Simple guest list & RSVP tracker for events that actually works.**
 
-Built for weddings, parties, small conferences, community events, dinners — anywhere people are still stuck using spreadsheets and group chats.
+Stop managing wedding guests, party invites, and small events in spreadsheets and group chats. GuestRSVP gives you a clean place to track who’s coming, who’s not, and how many seats you still have.
 
-## Features (Working MVP)
-- Create / view / delete events
-- Add / edit / delete guests
-- Status tracking: invited, confirmed, maybe, declined
-- Plus-ones support
-- Dietary notes
-- Capacity counter (confirmed + plus-ones)
-- Filter guests by status
-- One-click CSV export
-- Clean mobile-friendly UI
+---
 
-## Tech Stack
-- Node.js + Express
-- SQLite (better-sqlite3) — zero config
-- Vanilla HTML / CSS / JS frontend
+## Features
 
-## Quick Start
+- Create unlimited events
+- Add guests with name, email, phone, status, plus-ones & dietary notes
+- One-click status filters (Invited / Confirmed / Maybe / Declined)
+- Live capacity tracking (confirmed + plus-ones)
+- Export guest list to CSV
+- Clean, fast, mobile-friendly interface
+- Zero accounts, zero cloud dependency — runs fully on your machine
+
+---
+
+## Quick Setup (5 minutes)
+
+### Requirements
+- Node.js 18 or higher
+
+### Install & Run
 
 ```bash
 git clone https://github.com/mwatso12026-bit/guest-rsvp-tracker.git
@@ -29,36 +32,57 @@ npm install
 npm start
 ```
 
-Open http://localhost:3000
+Then open your browser:
 
-That's it. The SQLite database (`rsvp.db`) is created automatically on first run.
+**http://localhost:3000**
 
-## API Endpoints
+That’s it. The database is created automatically the first time you run it.
 
-### Events
-- `GET /api/events` — list all events
-- `GET /api/events/:id` — single event + capacity stats
-- `POST /api/events` — create event
-- `PUT /api/events/:id` — update event
-- `DELETE /api/events/:id` — delete event (and its guests)
+### Useful Commands
 
-### Guests
-- `GET /api/events/:eventId/guests` — list guests (optional `?status=`)
-- `POST /api/events/:eventId/guests` — add guest
-- `PUT /api/guests/:id` — update guest
-- `DELETE /api/guests/:id` — delete guest
+| Command       | What it does                  |
+|---------------|-------------------------------|
+| `npm start`   | Start the app                 |
+| `npm run dev` | Start with auto-reload        |
 
-### Other
-- `GET /api/events/:eventId/export` — CSV download
-- `POST /api/public/rsvp` — public RSVP endpoint (for future form)
+---
 
-## Database Schema
+## How to Use
 
-**events**
-- id, name, date, location, max_capacity, notes, created_at
+1. Click **+ New Event** and fill in the details
+2. Open the event and start adding guests
+3. Update their status as RSVPs come in
+4. Use the filters to see who’s confirmed
+5. Hit **Export CSV** when you need the list
 
-**guests**
-- id, event_id, name, email, phone, status, plus_ones, dietary_notes, notes, updated_at
+---
+
+## Tech Stack
+
+- **Backend:** Node.js + Express
+- **Database:** SQLite (single file, no setup)
+- **Frontend:** Vanilla HTML, CSS & JavaScript
+
+No frameworks. No bloat. Just a working tool.
+
+---
+
+## Project Structure
+
+```
+guest-rsvp-tracker/
+├── server.js          # Express API + static server
+├── db.js              # SQLite setup & schema
+├── public/
+│   ├── index.html     # Main UI
+│   ├── style.css      # Styles
+│   └── app.js         # Frontend logic
+├── package.json
+└── README.md
+```
+
+---
 
 ## License
-MIT
+
+MIT — do whatever you want with it.
