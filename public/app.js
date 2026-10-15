@@ -49,7 +49,51 @@ async function loadEvents() {
   eventsList.innerHTML = '';
 
   if (events.length === 0) {
-    eventsList.innerHTML = '<div class="empty">No events yet.<br>Create your first one to get started.</div>';
+    eventsList.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-hero">
+          <h2>No events yet</h2>
+          <p>Create your first event and start tracking guests in seconds.</p>
+          <button class="btn primary" onclick="document.getElementById('new-event-btn').click()">+ Create Your First Event</button>
+        </div>
+
+        <div class="use-cases">
+          <h3>Perfect for</h3>
+          <div class="use-case-grid">
+            <div class="use-case-card">
+              <div class="use-case-icon">💍</div>
+              <strong>Weddings</strong>
+              <span>Track RSVPs, plus-ones & meal choices</span>
+            </div>
+            <div class="use-case-card">
+              <div class="use-case-icon">🍼</div>
+              <strong>Baby Showers</strong>
+              <span>Keep the guest list organized & stress-free</span>
+            </div>
+            <div class="use-case-card">
+              <div class="use-case-icon">🎉</div>
+              <strong>Birthday Parties</strong>
+              <span>Know who’s coming and who’s not</span>
+            </div>
+            <div class="use-case-card">
+              <div class="use-case-icon">🏢</div>
+              <strong>Work Events</strong>
+              <span>Team lunches, offsites & company parties</span>
+            </div>
+            <div class="use-case-card">
+              <div class="use-case-icon">🍴</div>
+              <strong>Dinner Parties</strong>
+              <span>Small gatherings made simple</span>
+            </div>
+            <div class="use-case-card">
+              <div class="use-case-icon">🌟</div>
+              <strong>Celebrations</strong>
+              <span>Anniversaries, graduations & more</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
     return;
   }
 
