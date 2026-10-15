@@ -3,44 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Guest RSVP Tracker</title>
+  <title>GuestRSVP</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white' font-family='system-ui'>G</text></svg>">
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Guest RSVP Tracker</h1>
+  <div class="app">
+    <header class="app-header">
+      <div class="brand">
+        <div class="logo">G</div>
+        <div class="brand-text">
+          <span class="brand-name">GuestRSVP</span>
+          <span class="brand-tag">Event Guest Tracker</span>
+        </div>
+      </div>
       <button id="new-event-btn" class="btn primary">+ New Event</button>
     </header>
 
-    <!-- Events List View -->
-    <section id="events-view">
-      <div id="events-list" class="card-list"></div>
-    </section>
+    <main>
+      <!-- Events List View -->
+      <section id="events-view">
+        <div id="events-list" class="card-list"></div>
+      </section>
 
-    <!-- Single Event View -->
-    <section id="event-view" class="hidden">
-      <button id="back-btn" class="btn secondary">← Back to Events</button>
-      <div class="event-header">
-        <h2 id="event-title"></h2>
-        <div id="event-meta"></div>
-        <div class="actions">
-          <button id="add-guest-btn" class="btn primary">+ Add Guest</button>
-          <a id="export-btn" class="btn secondary" href="#">Export CSV</a>
-          <button id="delete-event-btn" class="btn danger">Delete Event</button>
+      <!-- Single Event View -->
+      <section id="event-view" class="hidden">
+        <button id="back-btn" class="btn ghost">← All Events</button>
+
+        <div class="event-header card">
+          <div>
+            <h2 id="event-title"></h2>
+            <div id="event-meta" class="meta"></div>
+          </div>
+          <div class="actions">
+            <button id="add-guest-btn" class="btn primary">+ Add Guest</button>
+            <a id="export-btn" class="btn secondary" href="#">Export CSV</a>
+            <button id="delete-event-btn" class="btn danger">Delete</button>
+          </div>
         </div>
-      </div>
 
-      <div class="filters">
-        <button class="filter-btn active" data-status="">All</button>
-        <button class="filter-btn" data-status="invited">Invited</button>
-        <button class="filter-btn" data-status="confirmed">Confirmed</button>
-        <button class="filter-btn" data-status="maybe">Maybe</button>
-        <button class="filter-btn" data-status="declined">Declined</button>
-      </div>
+        <div class="filters">
+          <button class="filter-btn active" data-status="">All</button>
+          <button class="filter-btn" data-status="invited">Invited</button>
+          <button class="filter-btn" data-status="confirmed">Confirmed</button>
+          <button class="filter-btn" data-status="maybe">Maybe</button>
+          <button class="filter-btn" data-status="declined">Declined</button>
+        </div>
 
-      <div id="guests-list" class="card-list"></div>
-    </section>
+        <div id="guests-list" class="card-list"></div>
+      </section>
+    </main>
   </div>
 
   <!-- New / Edit Event Modal -->
@@ -49,23 +61,23 @@
       <h3 id="event-modal-title">New Event</h3>
       <form id="event-form">
         <label>Name *</label>
-        <input type="text" id="event-name" required />
+        <input type="text" id="event-name" required placeholder="Summer Party 2026" />
 
         <label>Date</label>
         <input type="date" id="event-date" />
 
         <label>Location</label>
-        <input type="text" id="event-location" />
+        <input type="text" id="event-location" placeholder="Backyard / Zoom / Venue name" />
 
         <label>Max Capacity</label>
-        <input type="number" id="event-capacity" min="0" />
+        <input type="number" id="event-capacity" min="0" placeholder="Optional" />
 
         <label>Notes</label>
-        <textarea id="event-notes" rows="3"></textarea>
+        <textarea id="event-notes" rows="3" placeholder="Any extra details..."></textarea>
 
         <div class="modal-actions">
           <button type="button" class="btn secondary" id="cancel-event">Cancel</button>
-          <button type="submit" class="btn primary">Save</button>
+          <button type="submit" class="btn primary">Save Event</button>
         </div>
       </form>
     </div>
@@ -77,13 +89,13 @@
       <h3 id="guest-modal-title">Add Guest</h3>
       <form id="guest-form">
         <label>Name *</label>
-        <input type="text" id="guest-name" required />
+        <input type="text" id="guest-name" required placeholder="Full name" />
 
         <label>Email</label>
-        <input type="email" id="guest-email" />
+        <input type="email" id="guest-email" placeholder="optional" />
 
         <label>Phone</label>
-        <input type="text" id="guest-phone" />
+        <input type="text" id="guest-phone" placeholder="optional" />
 
         <label>Status</label>
         <select id="guest-status">
@@ -97,14 +109,14 @@
         <input type="number" id="guest-plus" min="0" value="0" />
 
         <label>Dietary Notes</label>
-        <input type="text" id="guest-dietary" />
+        <input type="text" id="guest-dietary" placeholder="Vegan, allergies, etc." />
 
         <label>Notes</label>
-        <textarea id="guest-notes" rows="2"></textarea>
+        <textarea id="guest-notes" rows="2" placeholder="Anything else..."></textarea>
 
         <div class="modal-actions">
           <button type="button" class="btn secondary" id="cancel-guest">Cancel</button>
-          <button type="submit" class="btn primary">Save</button>
+          <button type="submit" class="btn primary">Save Guest</button>
         </div>
       </form>
     </div>
