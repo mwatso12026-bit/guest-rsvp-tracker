@@ -4,54 +4,61 @@ Simple, focused tool for managing event guest lists and RSVPs.
 
 Built for weddings, parties, small conferences, community events, dinners — anywhere people are still stuck using spreadsheets and group chats.
 
-## Core Features (v1)
-- Create events
-- Add guests with name, email/phone, status, plus-ones, dietary notes
-- Filter by status (invited / confirmed / declined / maybe)
-- Capacity tracking
-- Export to CSV
-- Optional public RSVP form (later)
+## Features (Working MVP)
+- Create / view / delete events
+- Add / edit / delete guests
+- Status tracking: invited, confirmed, maybe, declined
+- Plus-ones support
+- Dietary notes
+- Capacity counter (confirmed + plus-ones)
+- Filter guests by status
+- One-click CSV export
+- Clean mobile-friendly UI
 
-## Database Schema (starting point)
+## Tech Stack
+- Node.js + Express
+- SQLite (better-sqlite3) — zero config
+- Vanilla HTML / CSS / JS frontend
+
+## Quick Start
+
+```bash
+git clone https://github.com/mwatso12026-bit/guest-rsvp-tracker.git
+cd guest-rsvp-tracker
+npm install
+npm start
+```
+
+Open http://localhost:3000
+
+That's it. The SQLite database (`rsvp.db`) is created automatically on first run.
+
+## API Endpoints
 
 ### Events
-| Column       | Type         | Notes                    |
-|--------------|--------------|--------------------------|
-| id           | uuid / serial| Primary key              |
-| name         | text         | Event name               |
-| date         | date/timestamp | Event date             |
-| location     | text         | Optional                 |
-| max_capacity | integer      | Optional                 |
-| notes        | text         | Optional                 |
-| created_at   | timestamp    |                          |
+- `GET /api/events` — list all events
+- `GET /api/events/:id` — single event + capacity stats
+- `POST /api/events` — create event
+- `PUT /api/events/:id` — update event
+- `DELETE /api/events/:id` — delete event (and its guests)
 
 ### Guests
-| Column       | Type         | Notes                              |
-|--------------|--------------|------------------------------------|
-| id           | uuid / serial| Primary key                        |
-| event_id     | fk           | References Events                  |
-| name         | text         | Required                           |
-| email        | text         | Optional                           |
-| phone        | text         | Optional                           |
-| status       | enum/text    | invited, confirmed, declined, maybe|
-| plus_ones    | integer      | Default 0                          |
-| dietary_notes| text         | Optional                           |
-| notes        | text         | Optional                           |
-| updated_at   | timestamp    |                                    |
+- `GET /api/events/:eventId/guests` — list guests (optional `?status=`)
+- `POST /api/events/:eventId/guests` — add guest
+- `PUT /api/guests/:id` — update guest
+- `DELETE /api/guests/:id` — delete guest
 
-That's it. Keep it this lean for the first version.
+### Other
+- `GET /api/events/:eventId/export` — CSV download
+- `POST /api/public/rsvp` — public RSVP endpoint (for future form)
 
-## Tech Stack Suggestions
-- Backend: whatever you're fastest with (Node, Python, etc.)
-- Database: Postgres / SQLite for simplicity
-- Frontend: simple admin UI + optional public form
+## Database Schema
 
-## Next Steps
-1. Set up the database tables
-2. Build basic CRUD for Events and Guests
-3. Add status filters and capacity count
-4. Ship a usable internal version first
-5. Add public RSVP form later
+**events**
+- id, name, date, location, max_capacity, notes, created_at
+
+**guests**
+- id, event_id, name, email, phone, status, plus_ones, dietary_notes, notes, updated_at
 
 ## License
-MIT (or whatever you prefer)
+MIT
