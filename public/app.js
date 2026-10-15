@@ -49,7 +49,7 @@ async function loadEvents() {
   eventsList.innerHTML = '';
 
   if (events.length === 0) {
-    eventsList.innerHTML = '<p style="color:#6b7280; text-align:center; padding:40px;">No events yet. Create your first one.</p>';
+    eventsList.innerHTML = '<div class="empty">No events yet.<br>Create your first one to get started.</div>';
     return;
   }
 
@@ -61,6 +61,7 @@ async function loadEvents() {
 
     const card = document.createElement('div');
     card.className = 'card';
+    card.style.cursor = 'pointer';
     card.innerHTML = `
       <h3>${escapeHtml(event.name)}</h3>
       <div class="meta">
@@ -85,10 +86,8 @@ async function openEvent(id) {
   eventTitle.textContent = event.name;
   const totalConfirmed = (event.confirmed_count || 0) + (event.confirmed_plus_ones || 0);
   eventMeta.innerHTML = `
-    <div class="meta">
-      ${event.date ? formatDate(event.date) : 'No date'} • ${event.location || 'No location'}<br>
-      ${event.max_capacity ? `${totalConfirmed} / ${event.max_capacity} confirmed` : `${totalConfirmed} confirmed`}
-    </div>
+    ${event.date ? formatDate(event.date) : 'No date'} • ${event.location || 'No location'}<br>
+    <strong style="color:var(--primary)">${event.max_capacity ? `${totalConfirmed} / ${event.max_capacity} confirmed` : `${totalConfirmed} confirmed`}</strong>
   `;
 
   exportBtn.href = `/api/events/${id}/export`;
@@ -151,7 +150,7 @@ async function loadGuests() {
   guestsList.innerHTML = '';
 
   if (guests.length === 0) {
-    guestsList.innerHTML = '<p style="color:#6b7280; text-align:center; padding:30px;">No guests yet.</p>';
+    guestsList.innerHTML = '<div class="empty">No guests yet.<br>Add your first guest above.</div>';
     return;
   }
 
@@ -231,7 +230,6 @@ async function saveGuest(e) {
 
   guestModal.classList.add('hidden');
   loadGuests();
-  // refresh event meta (capacity)
   openEvent(currentEventId);
 }
 
@@ -256,6 +254,5 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
-// Make edit/delete available globally for onclick
 window.editGuest = editGuest;
 window.deleteGuest = deleteGuest;
